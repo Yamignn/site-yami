@@ -3,7 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yami — Dev & Tech</title>
+<title>Yami — Bots Discord, sites, Otimização PC e Tech</title>
+<meta name="description" content="Yami: bots Discord, otimização Windows, ajustes de BIOS, consultoria de hardware e suporte técnico remoto. Atendimento direto via Discord.">
+<meta property="og:title" content="Yami — Bots Discord, Otimização PC e Tech">
+<meta property="og:description" content="Bots Discord, otimização Windows, BIOS tuning, consultoria de hardware e suporte técnico remoto.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://yami.dev.br">
+<meta name="theme-color" content="#050507">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Bebas+Neue&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -117,6 +123,92 @@ footer{position:relative;z-index:1;padding:3rem;display:flex;align-items:center;
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s}
 .reveal.vis{opacity:1;transform:none}
+
+  @media (max-width: 768px){
+  body{cursor:auto}
+  #c,#cr{display:none}
+
+  nav{
+    padding:1rem 1.2rem;
+    gap:1rem;
+  }
+
+  .nav-links{
+    display:none;
+  }
+
+  .nav-cta{
+    padding:.45rem .9rem;
+    font-size:.68rem;
+  }
+
+  .hero{
+    padding:7rem 1.2rem 4rem;
+    min-height:auto;
+  }
+
+  .hero-bg{
+    font-size:6rem;
+  }
+
+  h1{
+    font-size:4.2rem;
+  }
+
+  .hero-p{
+    font-size:.95rem;
+  }
+
+  .btns{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .btn-a,.btn-b{
+    justify-content:center;
+  }
+
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .si{
+    padding:2rem 1.2rem;
+  }
+
+  .section{
+    padding:5rem 1.2rem;
+  }
+
+  .sgrid,
+  .pgrid,
+  .dcwrap{
+    grid-template-columns:1fr;
+  }
+
+  .sc,
+  .pc,
+  .dcl,
+  .dcr{
+    padding:2rem;
+  }
+
+  .srow{
+    flex-direction:column;
+  }
+
+  .soc{
+    padding:1.5rem 1.2rem;
+    border-right:none;
+    border-bottom:1px solid var(--border);
+  }
+
+  footer{
+    flex-direction:column;
+    gap:1rem;
+    text-align:center;
+  }
+}
 </style>
 </head>
 <body>
@@ -254,13 +346,42 @@ footer{position:relative;z-index:1;padding:3rem;display:flex;align-items:center;
 
 <script>
 const c=document.getElementById('c'),cr=document.getElementById('cr');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;c.style.left=mx+'px';c.style.top=my+'px'});
-(function loop(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(loop)})();
-document.querySelectorAll('a,button').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{c.style.width='14px';c.style.height='14px';cr.style.width='48px';cr.style.height='48px'});
-  el.addEventListener('mouseleave',()=>{c.style.width='8px';c.style.height='8px';cr.style.width='32px';cr.style.height='32px'});
-});
+const isTouch=window.matchMedia('(hover:none), (pointer:coarse)').matches;
+
+if(!isTouch){
+  let mx=0,my=0,rx=0,ry=0;
+
+  document.addEventListener('mousemove',e=>{
+    mx=e.clientX;
+    my=e.clientY;
+    c.style.left=mx+'px';
+    c.style.top=my+'px';
+  });
+
+  (function loop(){
+    rx+=(mx-rx)*.1;
+    ry+=(my-ry)*.1;
+    cr.style.left=rx+'px';
+    cr.style.top=ry+'px';
+    requestAnimationFrame(loop);
+  })();
+
+  document.querySelectorAll('a,button').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{
+      c.style.width='14px';
+      c.style.height='14px';
+      cr.style.width='48px';
+      cr.style.height='48px';
+    });
+
+    el.addEventListener('mouseleave',()=>{
+      c.style.width='8px';
+      c.style.height='8px';
+      cr.style.width='32px';
+      cr.style.height='32px';
+    });
+  });
+}
 const canvas=document.getElementById('particles');
 const ctx=canvas.getContext('2d');
 let W,H,pts=[];
